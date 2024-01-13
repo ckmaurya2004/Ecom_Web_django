@@ -1,0 +1,144 @@
+{% extends 'basic.html' %}
+{% block CSS %}
+
+<!-- body .carousel-control-prev-icon,
+body .carousel-control-next-icon{
+background-color: blue;
+}
+body .carousel-indicator li{
+background-color: blue;
+}
+body .carousel-indicators{
+bottom: 0;
+} -->
+
+.col-md-3
+{
+display: inline-block;
+
+}
+.col-md-3 card{
+width:275px;
+height:270px;
+}
+
+<!-- .col-md-3 img{
+    width: 275px;
+    height: 200px;
+    } -->
+.card-img-top{
+height:270px;
+width:275px;
+}
+
+
+{% endblock %}
+{% load cart %}
+{% load custem_filter %}
+{% block body %}
+<div class="container">
+
+
+    <div class="row ">
+        <div class="col-md-2 ">
+            <div class="list-group my-4">
+                <a href="/" class="list-group-item list-group-item-action ">All Products</a>
+
+                {% for i in categories %}
+                <a href="/?category={{i.id}}" class="list-group-item list-group-item-action ">{{i.name}}</a>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <!--<div id="demo" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators">
+
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                {% for i in range %}
+
+                <li data-target="#demo" data-slide-to="{{i}}"></li>
+                {% endfor %}
+            </ul>-->
+
+
+        <div class="col-md-10 ">
+
+
+            <div class="carousel-item active">
+                <div class="row ">
+
+                    {% for i in products %}
+                    <div class="col-xs-3 col-sm-3 col-md-3">
+
+                        <div class="card mt-4" id="{{i.id}}" style="width: 15rem;">
+                            <img src='/media/{{i.image}}' class="card-img-top" alt="..." style="height: 200px;">
+                            <div class="card-body">
+                                <h5 class="card-title" id="namepr{{i.id}}">{{i.name}}</h5>
+                                <p class="card-text">{{i.desc|slice:"0:20"}}...</p>
+                                <h5 class="card-title">{{i.price|rate_set}}</h5>
+                                </h5>
+
+
+                            </div>
+                        
+                            <div class="card-footer ">
+
+                                {% if i|is_in_cart:request.session.cart %}
+                                <div class="row no-gutters">
+                                    <form action="/#{{i.id}}" method="post" class="col-2">{% csrf_token %}
+                                        <input type="hidden" class="form-control" value="{{i.id}}" name="cartprod">
+                                        <input type="hidden" class="form-control" value="True" name="remove">
+                                        <input type="submit" value=" - " class="  text-center btn-block btn-primary">
+
+                                    </form>
+                                    <div class="text-center col"> {{i|cart_qty:request.session.cart }} cart in</div>
+                                    <form action="/#{{i.id}}" method="post" class="col-2">{% csrf_token %}
+                                        <input type="hidden" class="form-control" value="{{i.id}}" name="cartprod">
+                                        <input type="submit" value=" + " class=" text-center btn-block btn-primary">
+
+                                    </form>
+                                </div>
+                                {% else %}
+                                <form action="/#{{i.id}}" method="POST" class="btn-block">{% csrf_token %}
+                                    <input type="hidden" class="form-control" value="{{i.id}}" name="cartprod">
+
+                                    <button class="btn btn-primary cart float-right form-control ">Add To Cart</button>
+                                </form>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--{% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
+                    </div>
+                    <div class="carousel-item">
+                        {% endif %}-->
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+        <!-- <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>-->
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

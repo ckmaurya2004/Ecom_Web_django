@@ -1,0 +1,52 @@
+{% extends 'basic.html' %}
+
+{% block title %} Cart Page{% endblock %}
+
+{% load cart %}
+{% load custem_filter %}
+{% block body %}
+
+
+<div class="container my-4">
+  <div class="border rounded p-4 m-4">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Sno.</th>
+          <th>Image</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in product %}
+        <tr>
+          <td>{{i.id}}.</td>
+          <td><img  style="height: 60px; ;" class="rounded-circle " src="{{i.image.url}}" ></td>
+          <td>{{i.name}}</td>
+          <td>{{i.price|rate_set}}</td>
+          <td>{{i|cart_qty:request.session.cart}}</td>
+          <td>{{i|price_total:request.session.cart|rate_set}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="4">Total</th>
+          <th>{{product|total_cart_price:request.session.cart|rate_set}}</th>
+        </tr>
+      </tfoot>
+    </table>
+    </div>
+    <div>
+    </div>
+   <a href="/checkout" class="btn btn-success float-right">Check Out</a>
+  
+
+
+
+</div>
+{% endblock %}
