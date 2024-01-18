@@ -10,7 +10,7 @@ import datetime
 from .mymiddleware.my_auth_middle import auth_middleware
 from django.utils.decorators import method_decorator
 
-# Create your views here.
+
 
 def index(request):
     if request.method == 'POST':

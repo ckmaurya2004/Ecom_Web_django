@@ -1,16 +1,6 @@
 {% extends 'basic.html' %}
 {% block CSS %}
 
-<!-- body .carousel-control-prev-icon,
-body .carousel-control-next-icon{
-background-color: blue;
-}
-body .carousel-indicator li{
-background-color: blue;
-}
-body .carousel-indicators{
-bottom: 0;
-} -->
 
 .col-md-3
 {
@@ -22,10 +12,6 @@ width:275px;
 height:270px;
 }
 
-<!-- .col-md-3 img{
-    width: 275px;
-    height: 200px;
-    } -->
 .card-img-top{
 height:270px;
 width:275px;
@@ -50,16 +36,6 @@ width:275px;
             </div>
 
         </div>
-
-        <!--<div id="demo" class="carousel slide" data-ride="carousel">
-            <ul class="carousel-indicators">
-
-                <li data-target="#demo" data-slide-to="0" class="active"></li>
-                {% for i in range %}
-
-                <li data-target="#demo" data-slide-to="{{i}}"></li>
-                {% endfor %}
-            </ul>-->
 
 
         <div class="col-md-10 ">
@@ -111,10 +87,7 @@ width:275px;
                         </div>
                     </div>
 
-                    <!--{% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
-                    </div>
-                    <div class="carousel-item">
-                        {% endif %}-->
+
 
                     {% endfor %}
 
